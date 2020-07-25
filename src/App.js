@@ -1,23 +1,25 @@
 import React, { Component } from "react";
 import { Title } from "./components/Title";
 import SeacrhForm from "./components/SearchFrom";
+import { MoviesList } from "./components/MoviesList";
 
 import "./App.css";
 import "bulma/css/bulma.css";
 
 class App extends Component {
-  state = { results: [] };
+  state = { usedSearch: false, results: [] };
 
   _handleResults = (results) => {
-    this.setState({ results });
+    this.setState({ results, usedSearch: true });
   };
 
-  _renderResults() {
-    const { results } = this.state;
-    return results.map((movie) => {
-      return <p key= {movie.imdbID}>{movie.Title}</p>;
-    });
-  }
+  _renderleResults = () => {
+    return this.state.results.length === 0 ? (
+      <p>No hay resultados</p>
+    ) : (
+      <MoviesList movies={this.state.results} />
+    );
+  };
 
   render() {
     return (
@@ -26,10 +28,10 @@ class App extends Component {
         <div className="SearchForm-weapper">
           <SeacrhForm onResults={this._handleResults} />
         </div>
-        {this.state.results.length === 0 ? (
-          <p>No hay resultados</p>
+        {this.state.usedSearch ? (
+          this._renderleResults()
         ) : (
-          this._renderResults()
+          <small>Use el formulario para buscar una pelicula</small>
         )}
       </div>
     );
