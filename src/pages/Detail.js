@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { ButtonBack } from "../components/ButtonBactToHome";
 
 const API_KEY = "e74426fe";
 
@@ -38,7 +39,7 @@ export class Detail extends Component {
     const { Title, Poster, Actors, Metascore, Plot } = this.state.movie;
     return (
       <div>
-        <button onClick={this._goBack}>Volver</button>
+        <ButtonBack />
         <h1>{Title}</h1>
         <img src={Poster} alt={Title} />
         <h2>{Actors}</h2>
